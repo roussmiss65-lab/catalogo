@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Ropa Seamless | Venta WhatsApp</title>
+
+    <meta property="og:title" content="Catálogo Oficial Miss Rouss | Ropa Seamless de Tendencia">
+    <meta property="og:description" content="Explora nuestra colección exclusiva de ropa deportiva y casual Seamless de alta calidad. ¡Pide tu look favorito directamente por WhatsApp!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/MISSROUSS.jpg">
+    <meta property="og:url" content="https://tu.tienda/">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Fondo gris claro */
+            color: #1f2937; /* Texto base oscuro */
+        }
+        .whatsapp-btn {
+            background-color: #25D366; /* Color de WhatsApp */
+            transition: background-color 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        /* Se mantiene el estilo LLM por si se decide reintroducir en el futuro, pero se elimina el uso */
+        .llm-output {
+            white-space: pre-wrap;
+            text-align: left;
+            padding: 1rem;
+            border-radius: 0.75rem; 
+            background-color: #f0f4ff; 
+            color: #1f2937;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            border-left: 5px solid #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .back-nav-btn {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            color: #3b82f6;
+            transition: color 150ms;
+        }
+        .back-nav-btn:hover {
+            color: #60a5fa;
+        }
+        .thumbnail-active {
+            border: 3px solid #3b82f6;
+            opacity: 100% !important;
+            transform: scale(1.05);
+        }
+    </style>
+    <svg style="display: none;">
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12.03 2.05c-5.46 0-9.92 4.46-9.92 9.92 0 1.94.57 3.8.31 5.43l-.42 2.74c-.07.45.36.8.81.74l3.18-.52c1.78.29 3.63.43 5.9.43 5.46 0 9.92-4.46 9.92-9.92.01-5.46-4.46-9.92-9.93-9.92zm3.32 12.87c-.07.13-.25.21-.49.21-.24 0-.44-.09-.64-.17-.46-.19-1.28-.52-2.17-1.34-.89-.83-1.48-1.92-1.66-2.31-.07-.15-.15-.22-.22-.36-.08-.14-.07-.33.02-.45.09-.13.25-.13.37-.13.12 0 .26.01.37.01.21 0 .28.05.4.31.11.23.38.93.42 1.01.04.09.07.18.01.29-.07.11-.13.17-.25.32-.1.14-.19.23-.29.35-.1.1-.19.23-.07.43.12.2.35.59.82.98.47.4.92.57 1.13.68.21.11.33.09.43.06.1-.03.22-.11.34-.19.12-.08.24-.13.38-.17.13-.04.28.01.38.15.1.14.1.4.01.52z"/>
+        </symbol>
+        <symbol id="icon-back" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </symbol>
+    </svg>
+</head>
+<body class="antialiased flex flex-col items-center bg-gray-100">
+    <div class="w-full max-w-xl p-4 pt-6 pb-2">
+        <img src="https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/Miss%20rouss.jpg" alt="Logo de la marca Seamless" class="w-full h-auto object-contain rounded-xl shadow-lg border border-gray-300 mx-auto">
+    </div>
+    <div id="app" class="min-h-screen w-full max-w-xl mx-auto shadow-2xl bg-white">
+        
+        <header class="p-4 bg-white border-b border-gray-200 sticky top-0 z-10 shadow-md flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold text-gray-800 text-center flex-grow">CATÁLOGO</h1>
+            <button id="cart-button" onclick="renderCartView()" class="relative rounded-full hover:opacity-90 transition-opacity duration-150 p-1">
+                <span id="cart-icon-container" class="text-3xl">🛒</span>
+                <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full hidden">0</span>
+            </button>
+        </header>
+
+        <main class="p-4">
+            
+            <div id="category-view" class="space-y-3">
+                <p class="text-gray-600 mb-4 text-center text-sm">Selecciona una categoría para ver los modelos disponibles.</p>
+                </div>
+
+            <div id="product-list-view" class="hidden">
+                <button onclick="goBackToCategories()" class="back-nav-btn cursor-pointer">
+                    <svg class="w-4 h-4 mr-1" aria-hidden="true"><use xlink:href="#icon-back"></use></svg> Volver a Categorías
+                </button>
+                <h2 id="current-category-title" class="text-xl font-bold text-gray-800 mb-4"></h2>
+                <div id="models-container" class="grid grid-cols-2 gap-4">
+                    </div>
+            </div>
+
+            <div id="product-detail-view" class="hidden p-4 bg-white rounded-xl">
+                <button onclick="goBackToProducts()" class="back-nav-btn cursor-pointer">
+                    <svg class="w-4 h-4 mr-1" aria-hidden="true"><use xlink:href="#icon-back"></use></svg> Volver a Modelos
+                </button>
+
+                <div class="space-y-4 mb-6 p-2 rounded-xl border border-gray-200">
+                    <div class="relative group">
+                        <img id="detail-main-image" src="" alt="Foto principal del modelo" class="w-full h-auto object-cover rounded-xl shadow-lg border-2 border-gray-200 cursor-pointer">
+                        <button onclick="openZoomModal(event)" class="absolute bottom-3 right-3 p-2 bg-blue-600/80 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl flex items-center space-x-1 hover:bg-blue-700/90 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+                            <span class="text-xs font-semibold">Zoom</span>
+                        </button>
+                    </div>
+
+                    <div id="gallery-thumbnails" class="flex flex-row space-x-2 overflow-x-auto pb-1 justify-center">
+                        </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 id="detail-model-name" class="text-2xl font-bold text-gray-800 mb-1">Modelo de Ejemplo</h3>
+                    <p id="detail-category-name" class="text-md font-medium text-gray-500 mb-3"></p>
+                    <p id="detail-price" class="text-3xl font-extrabold text-blue-600 mb-4">$X.XXX MXN</p>
+                </div>
+
+                <form id="order-form" class="space-y-4">
+                    <div id="color-selector-group">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Color</label>
+                        <select id="selected-color" required onchange="updateDetailOptions()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900">
+                            </select>
+                    </div>
+                    
+                    <div>
+                        <label for="selected-quantity" class="block text-sm font-semibold text-gray-700 mb-2">Cantidad</label>
+                        <input type="number" id="selected-quantity" value="1" min="1" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900">
+                    </div>
+                    
+                    <button type="submit" id="add-to-cart-btn" disabled class="w-full p-4 mt-6 rounded-xl text-white font-bold text-lg flex items-center justify-center space-x-2 transition duration-300 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Añadir al Carrito
+                    </button>
+                    <p id="validation-message" class="text-center text-red-500 text-sm hidden">Selecciona Color para añadir al carrito.</p>
+                </form>
+            </div>
+
+            <div id="cart-view" class="hidden p-4 bg-white rounded-xl">
+                <button onclick="goBackToProducts()" class="back-nav-btn cursor-pointer">
+                    <svg class="w-4 h-4 mr-1" aria-hidden="true"><use xlink:href="#icon-back"></use></svg> Seguir Comprando
+                </button>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Tu Carrito de Compras</h2>
+                
+                <div id="cart-items-container" class="space-y-4 mb-6">
+                    </div>
+
+                <div class="text-right text-xl font-semibold text-gray-700 border-t border-gray-300 pt-4">
+                    Total de artículos: <span id="cart-total-items" class="text-blue-600">0</span>
+                </div>
+                
+                <button id="whatsapp-order-btn" onclick="sendWhatsAppOrder()" disabled class="whatsapp-btn w-full p-4 mt-6 rounded-xl text-white font-bold text-lg flex items-center justify-center space-x-2 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg class="w-6 h-6" aria-hidden="true"><use xlink:href="#icon-whatsapp"></use></svg>
+                    <span>CONFIRMAR PEDIDO POR WHATSAPP</span>
+                </button>
+            </div>
+
+            <div id="toast-container" class="fixed bottom-4 right-4 z-50"></div>
+
+        </main>
+    </div>
+
+    <div id="zoom-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4" onclick="closeZoomModal()">
+        <div class="relative w-full h-full flex items-center justify-center" onclick="event.stopPropagation()">
+            <img id="zoomed-image" src="" alt="Imagen ampliada del modelo" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+            <button onclick="closeZoomModal()" class="absolute top-4 right-4 p-2 bg-white/30 text-white rounded-full hover:bg-white/50 transition duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA MOCKUP (Simulación de la Base de Datos Estática) ---
+        const WHATSAPP_NUMBER = "+524451103626";
+
+        // LISTA DE CATEGORÍAS ACTUALIZADA: "Camisetas Tumbadas" al inicio.
+        const BASE_CATEGORY_NAMES = [
+            "Camisetas Tumbadas", 
+            "Conjuntos Deportivos", 
+            "Enterizos", 
+            "Leggings", 
+            "Shorts", 
+            "Blusas", 
+            "Calcetas"
+        ];
+
+        // Imágenes representativas para las tarjetas de categoría
+        const CATEGORY_COVERS = {
+            "Camisetas Tumbadas": "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/refs/heads/main/fotos/Oversize/Kamisetas%201%20HD.jpg",
+            "Conjuntos Deportivos": "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/refs/heads/main/fotos/Conjunto/Conjuntos%20.jpg",
+            "Enterizos": "AQUÍ_VA_LA_URL_DE_TU_IMAGEN_DE_600x400_O_300x200.jpg",
+            "Leggings": "AQUÍ_VA_LA_URL_DE_TU_IMAGEN_DE_600x400_O_300x200.jpg",
+            "Shorts": "AQUÍ_VA_LA_URL_DE_TU_IMAGEN_DE_600x400_O_300x200.jpg",
+            "Blusas": "AQUÍ_VA_LA_URL_DE_TU_IMAGEN_DE_600x400_O_300x200.jpg",
+            "Calcetas": "AQUÍ_VA_LA_URL_DE_TU_IMAGEN_DE_600x400_O_300x200.jpg",
+        };
+
+
+        // URLs de imágenes específicas
+        const CONJUNTO_IMAGES = [
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_02.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_03.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_04.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_05.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_06.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_07.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_08.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_09.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_10.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_11.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_12.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/fotos/Conjunto/CONJUNTO_13.jpg",
+        ];
+
+        const ENTERIZO_IMAGES = [ 
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0013.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0014.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0043.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0045.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0046.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0047.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0048.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0049.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0050.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0058.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0059.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0060.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0061.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0062.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0063.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0064.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0065.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0066.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0067.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0068.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0073.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0074.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0082.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0083.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0084.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0086.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0087.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0090.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0091.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0092.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0093.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0096.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos/Enterizos/IMG-20251011-WA0097.jpg?raw=true" 
+        ];
+
+        const LEGGINGS_MODEL_1_IMAGES = [
+            "https://blogger.googleusercontent.com/img/a/AVvXsEgs590X4v6riaUrexeEHGLIJmLC94sg4gJeZ7iY42JMqc0KUBeJ9E4kalyFg61vzQ3gD4PPrFYzipkm10rzWHCoGPC5cbk4O5lxC4FxwD8SHVb4ujO6Z04NCyylpE7yaNawuikBj2tIzslUEP2I_aILElHaUwwdhj87OMychqjSXCkubz7bQQ2qo73bSc",
+            "https://blogger.googleusercontent.com/img/a/AVvXsEgsjUrVy4mxWPctXMu1DAsj1wPTQ363HcbE8ftZvzt9-LGHTobjAKfeLw1V2CBES6lPPEnrC9dN-Z2Q7fwwTvLOkUNArqltlqdWy_7TlVlg59Resygq7s9Op8eq90kh_Z9qVpuvF0IQ0L2c0XViKCkoYjlpX63djYsKsQPBC7D2z2DG9bGZPltNYv2g974",
+            "https://blogger.googleusercontent.com/img/a/AVvXsEj2-YyfL8n8rMbL08S0ZD2ng26_dTs_VVtb0YphpTnWD43ohMWMQYEcAkuuOrLFcJ2vkm_1fmiytXd7ySmiuqp6_kh7AZWWSYfL4kqz-lOtfH2XuE9xQWqtSS0fMMLMBX8CkejWF3i0UEpo9KHFZbl430A41aij5tj7cWPLQ1xV6Q6bI--SW_S_7S5EjEM",
+            "https://blogger.googleusercontent.com/img/a/AVvXsEi7wfD58p-qcbMjpmW-46TYecIG1_J18Ys77aL6YaEDXN7-gNXNXZiLZzJYEUcm9tnkmlF8LvlPRBAs04RKIY5qdKm-KZWIXmiA-qzWxbVS11GcSEnzHp5PBKqyeMWRlBXNBIMojz5iYGkTwl9zL1duLqKqxSkdp1BIWSmWLYKQv-RENR4e1aGT9Y6y8Z8",
+            "https://blogger.googleusercontent.com/img/a/AVvXsEic3nBSl0NjjQy9jnUBOv-iqkdvDj5kOrIQ6Xk45OxN8ba7vsuX3aQ9N5MzQ10_6kShn2n_lqNj4D-XFatqYwbiGyq0veP1ZJaZXx6w09Eg34L_sP6q-0eHGAdAc9vpxHXUgs7S0dnhW4aRoz7qqssBRFrB0IOaiQifJSuVmKF_oDSGVe0HN2z9oaF_CR0g"
+        ];
+        
+        // NUEVAS IMÁGENES DE SHORTS
+        const SHORTS_IMAGES = [
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos%2FShorts%2FSHORTS_01.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos%2FShorts%2FSHORTS_02.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos%2FShorts%2FSHORTS_03.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos%2FShorts%2FSHORTS_04.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos%2FShorts%2FSHORTS_05.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos%2FShorts%2FSHORTS_06.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos%2FShorts%2FSHORTS_07.jpg?raw=true",
+            "https://github.com/jesusvn1993mplvt3-ai/rosasandoval/blob/main/fotos%2FShorts%2FSHORTS_08.jpg?raw=true",
+        ];
+
+        // NUEVAS IMÁGENES DE CAMISETAS OVERSIZE - JUNIOR H
+        const JUNIOR_H_IMAGES = [
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/refs/heads/main/fotos/Oversize/Junior%20H/Junior%20H%20%20(9).jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/refs/heads/main/fotos/Oversize/Junior%20H/Junior%20H%20%20(4).jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/refs/heads/main/fotos/Oversize/Junior%20H/Junior%20H%20%20(3).jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/refs/heads/main/fotos/Oversize/Junior%20H/Junior%20H%20%20(5).jpg",
+        ];
+
+        // NUEVAS IMÁGENES DE CAMISETAS OVERSIZE - FUERZA REGIDA (Añadidas)
+        const FUERZA_REGIDA_IMAGES = [
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/Fuerza%20Regida/FR1.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/Fuerza%20Regida/FR2.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/Fuerza%20Regida/FR3.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/Fuerza%20Regida/FR4.jpg",
+        ];
+        
+        // ******************************************************************
+        // ********* NUEVOS ARRAYS DE IMAGEN PARA LOS MODELOS DE CAMISETAS **********
+        // ******************************************************************
+        
+        // NOTA: Deja las matrices vacías si aún no tienes las URLs.
+        // La lógica de abajo usará el placeholder en su lugar.
+        
+        const PESO_PLUMA_IMAGES = [
+              "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/PesoPluma/PP1.jpg",
+              "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/PesoPluma/PP2.jpg",
+              "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/PesoPluma/PP3.jpg",
+              "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/PesoPluma/PP4.jpg",
+        ];
+        
+        const ALFREDO_OLIVAS_IMAGES = [
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/AlfredoO/AO1.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/AlfredoO/AO2.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/AlfredoO/AO3.jpg",
+            "https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/miss_rouss/refs/heads/main/fotos/Oversize/AlfredoO/AO4.jpg",
+        ];
+        
+        // ******************************************************************
+
+        // Se mantiene la estructura de datos CATALOGO
+        const CATALOG_DATA_MODELS = BASE_CATEGORY_NAMES.reduce((acc, cat) => {
+            
+            // --- LÓGICA ESPECÍFICA PARA 'Camisetas Tumbadas' ---
+            if (cat === "Camisetas Tumbadas") {
+                const artistas = [
+                    { name: "Junior H", id: "TUMB-JH" },
+                    { name: "Peso Pluma", id: "TUMB-PP" },
+                    { name: "Fuerza Regida", id: "TUMB-FR" },
+                    { name: "Alfredo Olivas", id: "TUMB-AO" } 
+                ];
+
+                // ******************************************************************
+                // *** COLORES COMUNES PARA CAMISETAS TUMBADAS (Junior H y F. Regida los usan) ***
+                // ******************************************************************
+                const TUMBADA_COLORS = ["Negro/Rojo", "Negro/Plata", "Negro/Dorado"]; 
+
+                acc[cat] = artistas.map(artista => {
+                    const isJuniorH = artista.id === 'TUMB-JH';
+                    const isFuerzaRegida = artista.id === 'TUMB-FR';
+                    const isPesoPluma = artista.id === 'TUMB-PP'; // NUEVA bandera
+                    const isAlfredoOlivas = artista.id === 'TUMB-AO'; // NUEVA bandera
+                    
+                    const defaultImage = `https://placehold.co/300x400/3d3d3d/ffffff?text=${artista.name.replace(/\s/g, '+')}`;
+                    
+                    // Lógica para las imágenes de galería
+                    let modelImages = []; 
+                    
+                    if (isJuniorH) {
+                        modelImages = JUNIOR_H_IMAGES;
+                    } else if (isFuerzaRegida) {
+                        modelImages = FUERZA_REGIDA_IMAGES;
+                    } else if (isPesoPluma) { // *** ASIGNACIÓN DE IMÁGENES DE PESO PLUMA ***
+                        modelImages = PESO_PLUMA_IMAGES;
+                    } else if (isAlfredoOlivas) { // *** ASIGNACIÓN DE IMÁGENES DE ALFREDO OLIVAS ***
+                        modelImages = ALFREDO_OLIVAS_IMAGES;
+                    }
+                    
+                    // Asegura que si el array de imágenes está vacío, use el placeholder
+                    if (modelImages.length === 0) {
+                        modelImages.push(defaultImage);
+                    }
+
+                    // *** LOS COLORES SIEMPRE SON TUMBADA_COLORS ***
+                    const colors = TUMBADA_COLORS;
+                    
+                    return {
+                        id: artista.id,
+                        name: `Camiseta Tumbada - ${artista.name}`,
+                        price: (200.00).toFixed(2),
+                        // Usar la primera imagen real si existe, sino placeholder
+                        image: modelImages[0] || defaultImage,
+                        // Usar la galería de imágenes reales, sino un array con el placeholder
+                        gallery: modelImages,
+                        colors: colors, // <--- APLICACIÓN DE COLORES DINÁMICA
+                    };
+                });
+                return acc; // Finaliza aquí para esta categoría
+            }
+            // --- FIN LÓGICA 'Camisetas Tumbadas' ---
+            
+            const isEnterizo = cat === "Enterizos";
+            const isConjunto = cat === "Conjuntos Deportivos";
+            const isLegging = cat === "Leggings";
+            const isShorts = cat === "Shorts"; // Nuevo flag para Shorts
+            let count = 5; // Default for most categories
+
+            if (isEnterizo) count = ENTERIZO_IMAGES.length;
+            if (isConjunto) count = CONJUNTO_IMAGES.length;
+            if (isShorts) count = SHORTS_IMAGES.length; // Usar el número de imágenes de Shorts
+
+            acc[cat] = Array.from({ length: count }, (_, i) => {
+                const isLegging1 = isLegging && i === 0;
+                let modelData = {
+                    id: `${cat.substring(0, 3)}-${i + 1}`,
+                    name: `${cat} - Modelo ${i + 1}`,
+                    price: (250 + (i * 50)).toFixed(2),
+                    // Imagen placeholder por defecto
+                    image: `https://placehold.co/300x400/cccccc/333333?text=MOD+${i+1}`,
+                    gallery: Array.from({ length: 5 }, (_, j) => `https://placehold.co/100x100/cccccc/333333?text=FOTO+${j+1}`),
+                    colors: ["Negro", "Gris Humo", "Beige", "Rosa Pastel", "Azul Acero"],
+                };
+
+                if (isEnterizo) {
+                    const enterizoId = i + 1;
+                    modelData.id = `ENT-${enterizoId}`;
+                    modelData.name = `Enterizo Seamless E${enterizoId}`;
+                    modelData.price = (299.00 + (i * 5)).toFixed(2);
+                    const imageUrl = ENTERIZO_IMAGES[i] || modelData.image;
+                    modelData.image = imageUrl;
+                    modelData.gallery = [imageUrl];
+                    modelData.colors = ["Negro", "Gris Oxford", "Azul Marino", "Vino", "Verde Militar", "Rosa Palo", "Beige (Nude)", "Lila"];
+                } else if (isConjunto) {
+                    // Lógica para los 12 conjuntos nuevos
+                    modelData.id = `CONJ-${i + 1}`;
+                    modelData.name = `Conjunto Deportivo C${i + 1} (Seamless)`;
+                    modelData.price = (399.00 + (i * 10)).toFixed(2); // Precio inicial ajustado
+                    modelData.image = CONJUNTO_IMAGES[i]; // Asigna la imagen específica
+                    // Simular más fotos para el detalle para probar la galería
+                    modelData.gallery = [CONJUNTO_IMAGES[i]]; 
+                    modelData.colors = ["Negro", "Gris", "Vino", "Verde Militar", "Azul"];
+                } else if (isShorts) { // NUEVA LÓGICA PARA SHORTS
+                    modelData.id = `SHORTS-${i + 1}`;
+                    modelData.name = `Short Ciclismo Seamless S${i + 1}`;
+                    modelData.price = (180.00 + (i * 5)).toFixed(2);
+                    modelData.image = SHORTS_IMAGES[i];
+                    modelData.gallery = [SHORTS_IMAGES[i]];
+                    modelData.colors = ["Negro", "Gris Claro", "Vino", "Azul Eléctrico", "Lila", "Rojo Intenso"];
+                } else if (isLegging1) {
+                    modelData.id = 'LEG-V1';
+                    modelData.name = "Legging Ultra Seamless V1";
+                    modelData.price = '85.00';
+                    modelData.image = LEGGINGS_MODEL_1_IMAGES[0];
+                    modelData.gallery = LEGGINGS_MODEL_1_IMAGES;
+                    modelData.colors = ["Negro", "Beige (Nude)", "Gris Oscuro", "Azul Marino", "Vino (Borgoña)"];
+                } else if (cat === "Blusas") {
+                    // Lógica simple para Blusas (que antes usaba el índice 5)
+                    modelData.id = `BLUSA-${i + 1}`;
+                    modelData.name = `Blusa B${i + 1} (Casual/Deportiva)`;
+                    modelData.price = (150.00 + (i * 10)).toFixed(2);
+                } else if (cat === "Calcetas") {
+                    // Lógica simple para Calcetas
+                    modelData.id = `CALC-${i + 1}`;
+                    modelData.name = `Calcetas Deportivas C${i + 1}`;
+                    modelData.price = (50.00 + (i * 5)).toFixed(2);
+                    modelData.colors = ["Negro", "Blanco", "Gris"];
+                }
+
+                // Asegurar que la primera imagen del gallery sea la principal
+                if (modelData.gallery.length > 0 && modelData.gallery[0] !== modelData.image) {
+                    modelData.gallery.unshift(modelData.image);
+                } else if (modelData.gallery.length === 0) {
+                    modelData.gallery.push(modelData.image);
+                }
+
+                return modelData;
+            });
+            return acc;
+        }, {});
+
+        const ALL_MODELS = Object.values(CATALOG_DATA_MODELS).flat();
+
+        let currentCategory = null;
+        let currentModel = null;
+        let selectedColor = null;
+        let cart = [];
+
+        // --- Elementos del DOM ---
+        const categoryView = document.getElementById('category-view');
+        const productListView = document.getElementById('product-list-view');
+        const productDetailView = document.getElementById('product-detail-view');
+        const cartView = document.getElementById('cart-view');
+        const zoomModal = document.getElementById('zoom-modal');
+        const zoomedImage = document.getElementById('zoomed-image');
+
+        const categoriesContainer = document.getElementById('category-view');
+        const modelsContainer = document.getElementById('models-container');
+        const categoryTitle = document.getElementById('current-category-title');
+
+        const cartCountSpan = document.getElementById('cart-count');
+        const toastContainer = document.getElementById('toast-container');
+        const form = document.getElementById('order-form');
+
+        const colorSelect = document.getElementById('selected-color');
+        const colorSelectorGroup = document.getElementById('color-selector-group');
+        const quantityInput = document.getElementById('selected-quantity');
+
+        const detailImage = document.getElementById('detail-main-image'); // Imagen principal
+        const galleryThumbnails = document.getElementById('gallery-thumbnails'); // Nuevo
+        const detailModelName = document.getElementById('detail-model-name');
+        const detailCategoryName = document.getElementById('detail-category-name');
+        const detailPrice = document.getElementById('detail-price');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        const validationMessage = document.getElementById('validation-message');
+
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartTotalItems = document.getElementById('cart-total-items');
+        const whatsappOrderBtn = document.getElementById('whatsapp-order-btn');
+
+        // --- Funciones de Utilidad ---
+
+        function showToast(message, type = 'success') {
+            const colors = { success: 'bg-green-500', error: 'bg-red-500' };
+            const toast = document.createElement('div');
+            toast.className = `p-3 mb-2 ${colors[type]} text-white rounded-lg shadow-xl opacity-0 transform translate-y-2 transition-all duration-300`;
+            toast.textContent = message;
+
+            // Limitar a 3 toasts a la vez
+            if (toastContainer.children.length >= 3) {
+                toastContainer.removeChild(toastContainer.firstChild);
+            }
+
+            toastContainer.appendChild(toast);
+
+            // Mostrar
+            setTimeout(() => toast.classList.remove('opacity-0', 'translate-y-2'), 10);
+            
+            // Ocultar
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // --- Funciones de Navegación y Vistas ---
+
+        function updateView(viewId) {
+            // Ocultar todas las vistas principales
+            ['category-view', 'product-list-view', 'product-detail-view', 'cart-view'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            // Mostrar la vista solicitada
+            document.getElementById(viewId).classList.remove('hidden');
+        }
+
+        function goBackToCategories() {
+            currentCategory = null;
+            currentModel = null;
+            updateView('category-view');
+        }
+
+        function goBackToProducts() {
+            currentModel = null;
+            if (currentCategory) renderProductList(currentCategory);
+            else goBackToCategories();
+        }
+
+        // Función para cambiar la imagen principal y actualizar el estado activo
+        function setMainImage(imageUrl, event) {
+            detailImage.src = imageUrl;
+            
+            // Actualizar borde activo en las miniaturas
+            document.querySelectorAll('#gallery-thumbnails img').forEach(img => {
+                img.classList.remove('thumbnail-active');
+            });
+
+            if (event && event.target) {
+                event.target.classList.add('thumbnail-active');
+            }
+        }
+
+        // --- Funciones de Zoom ---
+        function openZoomModal(event) {
+            event.preventDefault(); 
+            event.stopPropagation(); 
+            const imageUrl = detailImage.src;
+            if (!imageUrl) return;
+
+            zoomedImage.src = imageUrl;
+            zoomModal.classList.remove('hidden');
+        }
+
+        function closeZoomModal() {
+            zoomModal.classList.add('hidden');
+            zoomedImage.src = '';
+        }
+
+        // --- Funciones de Carrito y Almacenamiento ---
+
+        function saveCart() {
+            try {
+                localStorage.setItem('seamlessUserCart', JSON.stringify(cart));
+            } catch (e) {
+                console.error("No se pudo guardar el carrito en localStorage:", e);
+            }
+        }
+
+        function loadCart() {
+            try {
+                const savedCart = localStorage.getItem('seamlessUserCart');
+                if (savedCart) cart = JSON.parse(savedCart);
+            } catch (e) {
+                console.error("No se pudo cargar el carrito desde localStorage:", e);
+                cart = [];
+            }
+        }
+
+        function updateCartCount(animate = true) {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountSpan.textContent = totalItems;
+            
+            if (totalItems > 0) {
+                cartCountSpan.classList.remove('hidden');
+            } else {
+                cartCountSpan.classList.add('hidden');
+            }
+        }
+
+        function removeFromCart(index) {
+            const removedItemName = cart[index].name;
+            cart.splice(index, 1);
+            saveCart();
+            showToast(`✅ Eliminado: ${removedItemName}`, 'success');
+            renderCartView();
+        }
+
+        function updateCartItemQuantity(index, change) {
+            if (cart[index]) {
+                cart[index].quantity += change;
+                if (cart[index].quantity <= 0) removeFromCart(index);
+                else {
+                    saveCart();
+                    renderCartView();
+                    updateCartCount();
+                }
+            }
+        }
+
+        function updateDetailOptions() {
+            if (!currentModel) return;
+
+            // Si el modelo no tiene colores, se considera listo para añadir
+            if (!currentModel.colors || currentModel.colors.length === 0) {
+                addToCartBtn.disabled = false;
+                validationMessage.classList.add('hidden');
+                selectedColor = "Modelo Único (N/A)";
+            } else {
+                selectedColor = colorSelect.value;
+                const isValid = selectedColor && selectedColor !== 'placeholder';
+                
+                addToCartBtn.disabled = !isValid;
+                
+                if (isValid) {
+                    validationMessage.classList.add('hidden');
+                } else {
+                    validationMessage.classList.remove('hidden');
+                }
+            }
+        }
+
+        function addToCart(event) {
+            event.preventDefault();
+
+            if (!currentModel) return;
+
+            // Si hay colores disponibles y no se ha seleccionado uno
+            if (currentModel.colors && currentModel.colors.length > 0 && (!selectedColor || selectedColor === 'placeholder')) {
+                showToast('Por favor, selecciona un color.', 'error');
+                return;
+            }
+
+            const quantity = parseInt(quantityInput.value, 10);
+            if (quantity < 1 || isNaN(quantity)) {
+                showToast('La cantidad debe ser 1 o más.', 'error');
+                return;
+            }
+
+            const color = selectedColor || 'N/A';
+            const existingItemIndex = cart.findIndex(item => item.id === currentModel.id && item.color === color);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += quantity;
+                showToast(`✅ Cantidad actualizada de ${currentModel.name}`, 'success');
+            } else {
+                const itemToAdd = {
+                    id: currentModel.id,
+                    name: currentModel.name,
+                    category: currentCategory,
+                    color: color,
+                    price: parseFloat(currentModel.price),
+                    quantity: quantity,
+                    image: currentModel.image
+                };
+                cart.push(itemToAdd);
+                showToast(`✅ Añadido: ${currentModel.name} en ${color}`, 'success');
+            }
+
+            saveCart();
+            updateCartCount();
+            goBackToProducts();
+        }
+
+        function sendWhatsAppOrder() {
+            if (cart.length === 0) {
+                showToast('El carrito está vacío. Añade artículos antes de ordenar.', 'error');
+                return;
+            }
+
+            let orderSummary = `¡Hola! Me gustaría confirmar un pedido del Catálogo Seamless. Por favor, revisen la disponibilidad:\n\n*RESUMEN DEL PEDIDO* 🛍️\n\n`;
+            let grandTotal = 0;
+            let totalItems = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                grandTotal += itemTotal;
+                totalItems += item.quantity;
+                
+                // Formato de línea para WhatsApp
+                orderSummary += `*${index + 1}. ${item.name}*\n`;
+                orderSummary += `   - Categoría: ${item.category}\n`;
+                orderSummary += `   - Color: ${item.color}\n`;
+                orderSummary += `   - Cantidad: ${item.quantity} u.\n`;
+                orderSummary += `   - Precio Unitario: $${item.price.toFixed(2)} MXN\n`;
+                orderSummary += `   - Subtotal: $${itemTotal.toFixed(2)} MXN\n\n`;
+            });
+
+            orderSummary += `--------------------------------------\n`;
+            orderSummary += `*TOTAL DE ARTÍCULOS:* ${totalItems}\n`;
+            orderSummary += `*GRAN TOTAL ESTIMADO:* $${grandTotal.toFixed(2)} MXN\n\n`;
+            orderSummary += `Agradezco que me confirmen los detalles para proceder. ¡Gracias!`;
+
+            const encodedMessage = encodeURIComponent(orderSummary);
+            const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            
+            window.open(whatsappLink, '_blank');
+        }
+
+        // --- Funciones de Renderizado de Vistas ---
+
+        function renderCategories() {
+            updateView('category-view');
+            categoriesContainer.innerHTML = '';
+
+            BASE_CATEGORY_NAMES.forEach(category => {
+                const modelsCount = CATALOG_DATA_MODELS[category]?.length || 0;
+                const coverImage = CATEGORY_COVERS[category];
+                
+                // Se modificó la estructura para que el nombre de la categoría esté SOBRE la imagen con fondo transparente.
+                const cardHtml = `
+                    <div onclick="renderProductList('${category}')" class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 cursor-pointer border border-gray-300 transform hover:scale-[1.02] overflow-hidden relative">
+                        <img src="${coverImage}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=${category}';" 
+                            alt="Imagen de ${category}" class="w-full h-32 object-cover object-center">
+                        
+                        <div class="absolute inset-0 flex flex-col justify-end p-4 bg-black/20 hover:bg-black/10 transition duration-300">
+                            <h3 class="text-xl font-extrabold text-white shadow-text">${category}</h3>
+                            <p class="text-sm text-gray-200 mt-1">${modelsCount} modelos disponibles</p>
+                        </div>
+                    </div>`;
+                categoriesContainer.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        function renderProductList(categoryName) {
+            currentCategory = categoryName;
+            updateView('product-list-view');
+            categoryTitle.textContent = categoryName.toUpperCase();
+            modelsContainer.innerHTML = '';
+            
+            const models = CATALOG_DATA_MODELS[categoryName] || [];
+
+            models.forEach(model => {
+                const cardHtml = `
+                    <div onclick="renderProductDetail('${model.id}')" class="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden border border-gray-300 cursor-pointer">
+                        <img src="${model.image}" onerror="this.onerror=null;this.src='https://placehold.co/300x400/cccccc/333333?text=${model.id}';" 
+                            alt="${model.name}" class="w-full h-48 object-cover object-center rounded-t-xl">
+                        <div class="p-3">
+                            <p class="text-sm font-semibold text-gray-800 truncate">${model.name}</p>
+                            <p class="text-lg font-extrabold text-blue-600 mt-1">$${model.price} MXN</p>
+                        </div>
+                    </div>`;
+                modelsContainer.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        function renderProductDetail(modelId) {
+            currentModel = ALL_MODELS.find(m => m.id === modelId);
+            if (!currentModel) {
+                showToast('Modelo no encontrado.', 'error');
+                return;
+            }
+
+            updateView('product-detail-view');
+
+            detailModelName.textContent = currentModel.name;
+            detailCategoryName.textContent = currentCategory;
+            detailPrice.textContent = `$${parseFloat(currentModel.price).toFixed(2)} MXN`;
+            quantityInput.value = 1;
+
+            // 1. Cargar imagen principal
+            detailImage.src = currentModel.image;
+            detailImage.onerror = function() { this.onerror = null; this.src = 'https://placehold.co/300x400/cccccc/333333?text=IMAGEN+N/A'; };
+
+            // 2. Cargar galería de miniaturas
+            galleryThumbnails.innerHTML = '';
+            
+            if (currentModel.gallery && currentModel.gallery.length > 1) {
+                currentModel.gallery.forEach((imgUrl, index) => {
+                    const isActive = imgUrl === currentModel.image;
+                    const thumbnailHtml = `
+                        <img src="${imgUrl}" 
+                             onclick="setMainImage('${imgUrl}', event)" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/60x80/cccccc/333333?text=F${index+1}';" 
+                             alt="Miniatura ${index + 1}" 
+                             class="w-16 h-20 object-cover rounded-lg shadow-md border-2 border-transparent cursor-pointer transition transform duration-150 hover:opacity-90 ${isActive ? 'thumbnail-active' : ''}">
+                    `;
+                    galleryThumbnails.insertAdjacentHTML('beforeend', thumbnailHtml);
+                });
+            }
+
+
+            // 3. Cargar selector de color
+            colorSelect.innerHTML = '';
+
+            if (currentModel.colors && currentModel.colors.length > 0) {
+                colorSelectorGroup.classList.remove('hidden');
+                colorSelect.insertAdjacentHTML('beforeend', '<option value="placeholder" disabled selected>-- Selecciona un Color --</option>');
+                currentModel.colors.forEach(color => {
+                    colorSelect.insertAdjacentHTML('beforeend', `<option value="${color}">${color}</option>`);
+                });
+            } else {
+                colorSelectorGroup.classList.add('hidden');
+            }
+
+            // 4. Actualizar estado de botón de compra
+            updateDetailOptions(); 
+        }
+
+        function renderCartView() {
+            // Se elimina la lógica LLM
+            
+            updateView('cart-view');
+
+            cartItemsContainer.innerHTML = '';
+            let totalItems = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-center text-gray-500 py-8 text-lg font-medium">Tu carrito está vacío. ¡Añade tu primera prenda Seamless!</p>';
+                whatsappOrderBtn.disabled = true;
+            } else {
+                cart.forEach((item, index) => {
+                    totalItems += item.quantity;
+                    const itemTotal = item.price * item.quantity;
+                    const itemHtml = `
+                        <div class="flex items-start p-3 border border-gray-300 rounded-xl shadow-sm bg-gray-50 space-x-3 transition duration-150 hover:bg-white">
+                            <img src="${item.image}" onerror="this.onerror=null;this.src='https://placehold.co/60x80/cccccc/333333?text=N/A';" class="w-16 h-20 object-cover rounded-lg shadow-md flex-shrink-0" alt="${item.name}">
+                            <div class="flex-grow">
+                                <p class="text-sm font-bold text-gray-800">${item.name}</p>
+                                <p class="text-xs text-gray-500">Color: ${item.color}</p>
+                                <p class="text-sm font-semibold text-blue-600 mt-1">$${item.price.toFixed(2)} x ${item.quantity} u.</p>
+                                <p class="text-md font-bold text-blue-700 mt-1">Total: $${itemTotal.toFixed(2)} MXN</p>
+                            </div>
+                            <div class="flex flex-col items-end justify-between h-20">
+                                <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 transition duration-150 p-1 rounded-full bg-gray-200 flex-shrink-0 shadow-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                                </button>
+                                <div class="flex items-center space-x-2 bg-gray-200 border border-gray-300 rounded-full p-1 text-gray-800">
+                                    <button onclick="updateCartItemQuantity(${index}, -1)" class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-300 hover:bg-gray-400 text-lg font-bold transition duration-150">-</button>
+                                    <span class="font-semibold text-sm w-5 text-center">${item.quantity}</span>
+                                    <button onclick="updateCartItemQuantity(${index}, 1)" class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-300 hover:bg-gray-400 text-lg font-bold transition duration-150">+</button>
+                                </div>
+                            </div>
+                        </div>`;
+                    cartItemsContainer.insertAdjacentHTML('beforeend', itemHtml);
+                });
+
+                whatsappOrderBtn.disabled = false;
+            }
+
+            cartTotalItems.textContent = totalItems;
+            updateCartCount(false); // No animar si solo se renderiza la vista
+        }
+
+        // --- Inicialización ---
+
+        form.addEventListener('submit', addToCart);
+
+        window.onload = () => {
+            loadCart();
+            updateCartCount(false); // No animar en la carga inicial
+            renderCategories();
+        };
+
+    </script>
+</body>
+</html>
+
