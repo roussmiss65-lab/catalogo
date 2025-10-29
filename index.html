@@ -71,7 +71,7 @@
     <div id="app" class="min-h-screen w-full max-w-xl mx-auto shadow-2xl bg-white">
         
         <header class="p-4 bg-white border-b border-gray-200 sticky top-0 z-10 shadow-md flex justify-between items-center">
-            <h1 class="text-2xl font-extrabold text-gray-800 text-center flex-grow">CATÁLOGO</h1>
+            <h1 class="text-3xl font-extrabold text-gray-1100 text-center flex-grow">CATEGORÍAS</h1>
             <button id="cart-button" onclick="renderCartView()" class="relative rounded-full hover:opacity-90 transition-opacity duration-150 p-1">
                 <span id="cart-icon-container" class="text-3xl">🛒</span>
                 <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full hidden">0</span>
@@ -252,7 +252,7 @@
             "https://blogger.googleusercontent.com/img/a/AVvXsEgs590X4v6riaUrexeEHGLIJmLC94sg4gJeZ7iY42JMqc0KUBeJ9E4kalyFg61vzQ3gD4PPrFYzipkm10rzWHCoGPC5cbk4O5lxC4FxwD8SHVb4ujO6Z04NCyylpE7yaNawuikBj2tIzslUEP2I_aILElHaUwwdhj87OMychqjSXCkubz7bQQ2qo73bSc",
             "https://blogger.googleusercontent.com/img/a/AVvXsEgsjUrVy4mxWPctXMu1DAsj1wPTQ363HcbE8ftZvzt9-LGHTobjAKfeLw1V2CBES6lPPEnrC9dN-Z2Q7fwwTvLOkUNArqltlqdWy_7TlVlg59Resygq7s9Op8eq90kh_Z9qVpuvF0IQ0L2c0XViKCkoYjlpX63djYsKsQPBC7D2z2DG9bGZPltNYv2g974",
             "https://blogger.googleusercontent.com/img/a/AVvXsEj2-YyfL8n8rMbL08S0ZD2ng26_dTs_VVtb0YphpTnWD43ohMWMQYEcAkuuOrLFcJ2vkm_1fmiytXd7ySmiuqp6_kh7AZWWSYfL4kqz-lOtfH2XuE9xQWqtSS0fMMLMBX8CkejWF3i0UEpo9KHFZbl430A41aij5tj7cWPLQ1xV6Q6bI--SW_S_7S5EjEM",
-            "https://blogger.googleusercontent.com/img/a/AVvXsEi7wfD58p-qcbMjpmW-46TYecIG1_J18Ys77aL6YaEDXN7-gNXNXZiLZzJYEUcm9tnkmlF8LvlPRBAs04RKIY5qdKm-KZWIXmiA-qzWxbVS11GcSEnzHp5PBKqyeMWRlBXNBIMojz5iYGkTwl9zL1duLqKqxSkdp1BIWSmWLYKQv-RENR4e1aGT9Y6y8Z8",
+            "https://blogger.googleusercontent.com/img/a/AVvXsEi7wfD58p-qcbMjpmW-46TYecIG1_J18Ys77aL6YaEDXN7-gNXNXZiLZzJYEUcm9tnkmlF8LvlPRBAs04RKIY5qdKm-KZWIXmiA-qzWxbVS11GcSEnzHp5PBKqyeMWRlBXNBIMojz5iYGkTwl9zL1duLqKqxSkdp1BIWSmWLYKQv-RENR4e1aGT9Yv2g974",
             "https://blogger.googleusercontent.com/img/a/AVvXsEic3nBSl0NjjQy9jnUBOv-iqkdvDj5kOrIQ6Xk45OxN8ba7vsuX3aQ9N5MzQ10_6kShn2n_lqNj4D-XFatqYwbiGyq0veP1ZJaZXx6w09Eg34L_sP6q-0eHGAdAc9vpxHXUgs7S0dnhW4aRoz7qqssBRFrB0IOaiQifJSuVmKF_oDSGVe0HN2z9oaF_CR0g"
         ];
         
@@ -728,7 +728,7 @@
                 const cardHtml = `
                     <div onclick="renderProductList('${category}')" class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 cursor-pointer border border-gray-300 transform hover:scale-[1.02] overflow-hidden relative">
                         <img src="${coverImage}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=${category}';" 
-                            alt="Imagen de ${category}" class="w-full h-32 object-cover object-center">
+                            alt="Imagen de ${category}" class="w-full h-70 object-cover object-center"> <!-- CAMBIADO h-32 A h-36 (12.5% más alto) -->
                         
                         <div class="absolute inset-0 flex flex-col justify-end p-4 bg-black/20 hover:bg-black/10 transition duration-300">
                             <h3 class="text-xl font-extrabold text-white shadow-text">${category}</h3>
@@ -872,4 +872,3 @@
     </script>
 </body>
 </html>
-
