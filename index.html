@@ -23,8 +23,26 @@
             transition: background-color 0.3s ease;
         }
         .whatsapp-btn:hover {
-            background-color: #128C7E;
-        }
+            background-color: #128C7E;    
+            }  
+            .instagram-btn {
+    background-color: #E1306C; /* Color de Instagram */
+    transition: background-color 0.3s ease;
+    }
+    .instagram-btn:hover {
+    background-color: #C13584;
+    }
+.facebook-btn {
+    background-color: #1877F2; /* Color de Facebook */
+    transition: background-color 0.3s ease;
+}
+.facebook-btn:hover {
+    background-color: #145FB6;
+}
+/* FIN ESTILOS AÑADIDOS */
+            
+            }
+        
         /* Se mantiene el estilo LLM por si se decide reintroducir en el futuro, pero se elimina el uso */
         .llm-output {
             white-space: pre-wrap;
@@ -57,13 +75,36 @@
     </style>
     <svg style="display: none;">
         <symbol id="icon-whatsapp" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M12.03 2.05c-5.46 0-9.92 4.46-9.92 9.92 0 1.94.57 3.8.31 5.43l-.42 2.74c-.07.45.36.8.81.74l3.18-.52c1.78.29 3.63.43 5.9.43 5.46 0 9.92-4.46 9.92-9.92.01-5.46-4.46-9.92-9.93-9.92zm3.32 12.87c-.07.13-.25.21-.49.21-.24 0-.44-.09-.64-.17-.46-.19-1.28-.52-2.17-1.34-.89-.83-1.48-1.92-1.66-2.31-.07-.15-.15-.22-.22-.36-.08-.14-.07-.33.02-.45.09-.13.25-.13.37-.13.12 0 .26.01.37.01.21 0 .28.05.4.31.11.23.38.93.42 1.01.04.09.07.18.01.29-.07.11-.13.17-.25.32-.1.14-.19.23-.29.35-.1.1-.19.23-.07.43.12.2.35.59.82.98.47.4.92.57 1.13.68.21.11.33.09.43.06.1-.03.22-.11.34-.19.12-.08.24-.13.38-.17.13-.04.28.01.38.15.1.14.1.4.01.52z"/>
+        	  <path fill="currentColor" d="M12.03 2.05c-5.46 0-9.92 4.46-9.92 9.92 0 1.94.57 3.8.31 5.43l-.42 2.74c-.07.45.36.8.81.74l3.18-.52c1.78.29 3.63.43 5.9.43 5.46 0 9.92-4.46 9.92-9.92.01-5.46-4.46-9.92-9.93-9.92zm3.32 12.87c-.07.13-.25.21-.49.21-.24 0-.44-.09-.64-.17-.46-.19-1.28-.52-2.17-1.34-.89-.83-1.48-1.92-1.66-2.31-.07-.15-.15-.22-.22-.36-.08-.14-.07-.33.02-.45.09-.13.25-.13.37-.13.12 0 .26.01.37.01.21 0 .28.05.4.31.11.23.38.93.42 1.01.04.09.07.18.01.29-.07.11-.13.17-.25.32-.1.14-.19.23-.29.35-.1.1-.19.23-.07.43.12.2.35.59.82.98.47.4.92.57 1.13.68.21.11.33.09.43.06.1-.03.22-.11.34-.19.12-.08.24-.13.38-.17.13-.04.28.01.38.15.1.14.1.4.01.52z"/>
+        </symbol>
+        	<symbol id="icon-instagram" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2.163c3.204 0 3.584.013 4.85.07l1.379.055a4.011 4.011 0 0 1 3.28 2.502 4.011 4.011 0 0 1-2.503 3.28l-.054 1.378c-.057 1.267-.07 1.647-.07 4.85s.013 3.584.07 4.85l.055 1.379a4.011 4.011 0 0 1-2.502 3.28 4.011 4.011 0 0 1-3.28-2.503l-1.378-.054c-1.267-.057-1.647-.07-4.85-.07s-3.584.013-4.85.07l-1.379.055a4.011 4.011 0 0 1-3.28-2.502 4.011 4.011 0 0 1 2.503-3.28l.054-1.378c.057-1.267.07-1.647.07-4.85s-.013-3.584-.07-4.85l-.055-1.379a4.011 4.011 0 0 1 3.28-2.502 4.011 4.011 0 0 1 3.28 2.503l1.378.054c1.267.057 1.647.07 4.85.07zm0 2.404c-3.111 0-3.484.013-4.733.068l-1.306.052a1.597 1.597 0 0 0-1.252 1.002 1.598 1.598 0 0 0-1.001 1.251l-.052 1.307c-.055 1.248-.068 1.621-.068 4.732s.013 3.484.068 4.733l.052 1.306a1.597 1.597 0 0 0 1.002 1.252 1.598 1.598 0 0 0 1.251 1.001l1.307.052c1.248.055 1.621.068 4.732.068s3.484-.013 4.733-.068l1.306-.052a1.597 1.597 0 0 0 1.252-1.002 1.598 1.598 0 0 0 1.001-1.251l.052-1.307c.055-1.248.068-1.621.068-4.732s-.013-3.484-.068-4.733l-.052-1.306a1.597 1.597 0 0 0-1.002-1.252 1.598 1.598 0 0 0-1.251-1.001l-1.307-.052c-1.248-.055-1.621-.068-4.732-.068zm0 1.706c2.784 0 5.04 2.256 5.04 5.04s-2.256 5.04-5.04 5.04-5.04-2.256-5.04-5.04 2.256-5.04 5.04-5.04zm0 1.905c-1.722 0-3.135 1.413-3.135 3.135s1.413 3.135 3.135 3.135 3.135-1.413 3.135-3.135-1.413-3.135-3.135-3.135zm6.55"/>
+        </symbol>
+        <symbol id="icon-facebook" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2.052c-5.495 0-9.948 4.398-9.948 9.805 0 4.904 3.578 9.074 8.281 9.771V14.12h-2.91v-2.263h2.91v-1.748c0-2.887 1.718-4.482 4.385-4.482 1.25 0 2.327.094 2.637.135v2.793h-1.666c-1.311 0-1.57.625-1.57 1.545v1.942h3.111l-.502 2.263h-2.609v7.514c4.704-.697 8.282-4.867 8.282-9.771 0-5.407-4.453-9.805-9.948-9.805z"/>
         </symbol>
         <symbol id="icon-back" viewBox="0 0 24 24">
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
         </symbol>
     </svg>
 </head>
+<div class="fixed right-4 bottom-4 z-50 flex flex-col space-y-3">
+        
+        <a href="https://wa.me/+524451103626" target="_blank" rel="noopener noreferrer" 
+           class="whatsapp-btn w-12 h-12 rounded-full text-white shadow-2xl flex items-center justify-center transition duration-300 transform hover:scale-110">
+            <svg class="w-6 h-6" aria-hidden="true"><use xlink:href="#icon-whatsapp"></use></svg>
+        </a>
+        
+        <a href="https://www.instagram.com/miss.rouss.mx?igsh=ZGkwMmZ4anA4cHh2" target="_blank" rel="noopener noreferrer" 
+           class="instagram-btn w-12 h-12 rounded-full text-white shadow-2xl flex items-center justify-center transition duration-300 transform hover:scale-110">
+            <svg class="w-6 h-6" aria-hidden="true"><use xlink:href="#icon-instagram"></use></svg>
+        </a>
+
+        <a href="https://www.facebook.com/share/19BTFS5Srz/" target="_blank" rel="noopener noreferrer" 
+           class="facebook-btn w-12 h-12 rounded-full text-white shadow-2xl flex items-center justify-center transition duration-300 transform hover:scale-110">
+            <svg class="w-6 h-6" aria-hidden="true"><use xlink:href="#icon-facebook"></use></svg>
+        </a>
+    </div>
 <body class="antialiased flex flex-col items-center bg-gray-100">
     <div class="w-full max-w-xl p-4 pt-6 pb-2">
         <img src="https://raw.githubusercontent.com/jesusvn1993mplvt3-ai/rosasandoval/main/Miss%20rouss.jpg" alt="Logo de la marca Seamless" class="w-full h-auto object-contain rounded-xl shadow-lg border border-gray-300 mx-auto">
@@ -71,9 +112,9 @@
     <div id="app" class="min-h-screen w-full max-w-xl mx-auto shadow-2xl bg-white">
         
         <header class="p-4 bg-white border-b border-gray-200 sticky top-0 z-10 shadow-md flex justify-between items-center">
-            <h1 class="text-3xl font-extrabold text-gray-1100 text-center flex-grow">CATEGORÍAS</h1>
+            <h1 class="text-3xl font-extrabold text-gray-1100 text-center flex-grow">CATÁLOGO</h1>
             <button id="cart-button" onclick="renderCartView()" class="relative rounded-full hover:opacity-90 transition-opacity duration-150 p-1">
-                <span id="cart-icon-container" class="text-3xl">🛒</span>
+                <span id="cart-icon-container" class="text-5xl">🛒</span>
                 <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full hidden">0</span>
             </button>
         </header>
@@ -728,7 +769,7 @@
                 const cardHtml = `
                     <div onclick="renderProductList('${category}')" class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 cursor-pointer border border-gray-300 transform hover:scale-[1.02] overflow-hidden relative">
                         <img src="${coverImage}" onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=${category}';" 
-                            alt="Imagen de ${category}" class="w-full h-88 object-cover object-center"> <!-- CAMBIADO h-32 A h-36 (12.5% más alto) -->
+                            alt="Imagen de ${category}" class="w-full h-70 object-cover object-center"> <!-- CAMBIADO h-32 A h-36 (12.5% más alto) -->
                         
                         <div class="absolute inset-0 flex flex-col justify-end p-4 bg-black/20 hover:bg-black/10 transition duration-300">
                             <h3 class="text-xl font-extrabold text-white shadow-text">${category}</h3>
